@@ -20,10 +20,13 @@ TEST_CASE("DSVector class", "[vector]"){
     test.push_back("past capacity");
 
 
-    SECTION("push_back and at function") {
+    SECTION("push_back and locating functions") {
         REQUIRE((test.at(1) == "DSString"));
         REQUIRE((test.at(0) == "Avocado"));
         REQUIRE((test.at(3) == "doggo"));
         REQUIRE((test.at(10) == "past capacity"));
+        REQUIRE((test.find("Halloween") == 6));
+        REQUIRE((test.find("google") == 9));
+        REQUIRE((test.find("The moon") == 2));
     }
 }

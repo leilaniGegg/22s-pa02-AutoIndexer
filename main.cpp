@@ -29,6 +29,9 @@ int main(int argc, char** argv) {
         test.push_back("potato");
         test.push_back("doggo");
         cout << test.at(2) << endl;
+        cout << test.find("potato") << endl;
+        test.removeIndex(1);
+        cout << test.at(1);
     }
     return 0;
 }

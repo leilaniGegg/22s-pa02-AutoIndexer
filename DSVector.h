@@ -22,6 +22,9 @@ public:
     T& operator[](const int);
     int getSize();
     int getCapacity();
+    int find(const T&);
+    DSVector& removeIndex(const int);
+    DSVector& removeValue(const T&);
 };
 
 template <class T>
@@ -92,6 +95,46 @@ int DSVector<T>::getSize(){
 template<class T>
 int DSVector<T>::getCapacity(){
     return capacity;
+}
+
+template<class T>
+int DSVector<T>::find(const T& temp){
+    for(int i = 0; i < size; i++) {
+        if (data[i] == temp) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+template<class T>
+DSVector<T>& DSVector<T>::removeIndex(const int index){
+    T* temp = new T[capacity];
+    for(int i = 0; i < index;i++){
+        temp[i] = data[i];
+    }
+    int dataIndex, tempIndex;
+    //might be able to get rid of tempIndex condition
+    for(tempIndex = index, dataIndex = index + 1;
+        tempIndex < size && dataIndex < size; tempIndex++, dataIndex++){
+        temp[tempIndex] = data[dataIndex];
+    }
+    delete[] data;
+    data = temp;
+    return *this;
+    //Resize() for reference
+    /*T* temp = new T[capacity*2];
+    for(int i = 0; i < capacity; i++){
+        temp[i] = data[i];
+    }
+    delete[] data;
+    data = temp;
+    capacity *= 2; */
+}
+
+template<class T>
+DSVector<T>& DSVector<T>::removeValue(const T&){
+
 }
 
 #endif //INC_21F_PA02_DSVECTOR_H
