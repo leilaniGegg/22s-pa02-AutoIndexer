@@ -18,6 +18,10 @@ public:
     ~DSVector();
     DSVector& operator=(const DSVector&);
     T& push_back(T);
+    T& at(const int);
+    T& operator[](const int);
+    int getSize();
+    int getCapacity();
 };
 
 template <class T>
@@ -65,6 +69,29 @@ T& DSVector<T>::push_back(T value){
     data[size] = value;
     size++;
     return data[size-1];
+}
+
+template<class T>
+T& DSVector<T>::at(const int index){
+    if(index >= size){
+        throw std::out_of_range("Index is out of range!");
+    }
+    return data[index];
+}
+
+template<class T>
+T& DSVector<T>::operator[](const int index){
+    return data[index];
+}
+
+template<class T>
+int DSVector<T>::getSize(){
+    return size;
+}
+
+template<class T>
+int DSVector<T>::getCapacity(){
+    return capacity;
 }
 
 #endif //INC_21F_PA02_DSVECTOR_H

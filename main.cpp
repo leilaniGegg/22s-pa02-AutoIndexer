@@ -15,6 +15,7 @@
  */
 #include "catch_setup.h"
 #include "DSVector.h"
+#include "DSString.h"
 
 using namespace std;
 
@@ -23,11 +24,11 @@ int main(int argc, char** argv) {
         runCatchTests();
     }
     else {
-        std::cout << "Hello, 2341 students!" << std::endl;
-        std::cout << "Attempting to open and write to " << argv[2] << std::endl;
-        std::ofstream o(argv[2]);
-        o << "Writing to output file." << std::endl;
-        o.close();
+        DSVector<DSString> test;
+        test.push_back("tomato");
+        test.push_back("potato");
+        test.push_back("doggo");
+        cout << test.at(2) << endl;
     }
     return 0;
 }
