@@ -14,6 +14,7 @@
  * machine.
  */
 #include "catch_setup.h"
+#include "DSVector.h"
 
 using namespace std;
 
