@@ -27,7 +27,7 @@ DSString::DSString(const DSString& input){
 }
 DSString::~DSString(){
     if(word != nullptr){
-        delete word; //is this bracket or no?
+        delete[] word; //is this bracket or no?
     }
 }
 
@@ -157,7 +157,7 @@ istream& operator>>(istream& inSS, DSString& word){
     return inSS;
 }
 
-vector<DSString> DSString::parseTweet(const char* delim)const{
+vector<DSString> DSString::parseLine(const char* delim)const{
     vector<DSString> wordsFromTweet;
     char* tempWord = strtok(this->c_str(), delim);
     while(tempWord != NULL){

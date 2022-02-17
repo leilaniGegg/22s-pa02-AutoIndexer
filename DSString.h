@@ -122,7 +122,7 @@ public:
 
     friend istream& operator>>(istream& is,DSString& obj);
     size_t find_first_of (const DSString& s, size_t pos = 0) const;
-    vector<DSString> parseTweet(const char*)const;
+    vector<DSString> parseLine(const char*)const;
     DSString& toLower();
 
 

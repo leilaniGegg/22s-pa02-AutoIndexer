@@ -24,14 +24,15 @@ int main(int argc, char** argv) {
         runCatchTests();
     }
     else {
+        //DSVector<DSString>::iterator itr;
         DSVector<DSString> test;
         test.push_back("tomato");
         test.push_back("potato");
         test.push_back("doggo");
         cout << test.at(2) << endl;
-        cout << test.find("potato") << endl;
+        cout << "index" << test.find("potato") << endl;
         test.removeIndex(1);
-        cout << test.at(1);
+        test.display();
     }
     return 0;
 }
