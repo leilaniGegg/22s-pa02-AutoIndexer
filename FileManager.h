@@ -7,11 +7,12 @@
 
 #include "DSVector.h"
 #include "DSString.h"
+#include <fstream>
 
 class FileManager{
     //planning
 public:
-    DSVector<DSString>& readFile();
+    DSVector<DSString> readFile(const DSString&);
 };
 
 #endif //INC_21F_PA02_FILEMANAGER_H

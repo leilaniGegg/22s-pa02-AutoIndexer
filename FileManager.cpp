@@ -4,6 +4,20 @@
 
 #include "FileManager.h"
 
-DSVector<DSString>& FileManager::readFile(){
-
+DSVector<DSString> FileManager::readFile(const DSString& filename){
+    ifstream file;
+    file.open(filename.c_str());
+    if (!file.is_open()) {
+        cout << "Failed to open training file!" << endl;
+    }
+    DSVector<DSString> data;
+    char line[500];
+    while(file.getline(line, 500)) {
+        if(*line != ' ') {
+            DSString newLine(line);
+            data.push_back(newLine);
+        }
+    }
+    file.close();
+    return data;
 }

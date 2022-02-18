@@ -16,6 +16,7 @@
 #include "catch_setup.h"
 #include "DSVector.h"
 #include "DSString.h"
+#include "FileManager.h"
 
 using namespace std;
 
@@ -24,15 +25,11 @@ int main(int argc, char** argv) {
         runCatchTests();
     }
     else {
-        //DSVector<DSString>::iterator itr;
-        DSVector<DSString> test;
-        test.push_back("tomato");
-        test.push_back("potato");
-        test.push_back("doggo");
-        cout << test.at(2) << endl;
-        cout << "index" << test.find("potato") << endl;
-        test.removeIndex(1);
-        test.display();
+        FileManager IO;
+        DSVector<DSString> test = IO.readFile(argv[1]);
+        for (int i = 0; i < test.getSize(); i++) {
+            cout << test.at(i) << endl;
+        }
     }
     return 0;
 }
