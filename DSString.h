@@ -11,6 +11,7 @@
 #include <vector>
 #include <map>
 #include <iterator>
+#include "DSVector.h"
 
 using namespace std;
 
@@ -80,6 +81,7 @@ public:
 
     bool operator== (const char*);
     bool operator== (const DSString&);
+    bool operator!= (const DSString&);
     bool operator> (const DSString&) const;
     bool operator> (const char*);
     bool operator<(const DSString&)const;
@@ -121,8 +123,9 @@ public:
     friend ostream& operator<< (ostream&, const DSString&);
 
     friend istream& operator>>(istream& is,DSString& obj);
-    size_t find_first_of (const DSString& s, size_t pos = 0) const;
-    vector<DSString> parseLine(const char*)const;
+    DSVector<DSString> parseLine(const char*)const;
+    DSString parseLineIntoString(const char*); //return it as a single DSString
+    bool find(const DSString&);
     DSString& toLower();
 
 

@@ -75,6 +75,13 @@ bool DSString::operator== (const DSString& temp){
     return false;
 }
 
+bool DSString::operator!= (const DSString& temp){
+    if (strcmp(this->word, temp.word) == 0){
+        return false;
+    }
+    return true;
+}
+
 bool DSString::operator> (const DSString& temp) const{
     if (strcasecmp(this->c_str(), temp.c_str()) > 0){
         return true;
@@ -157,15 +164,33 @@ istream& operator>>(istream& inSS, DSString& word){
     return inSS;
 }
 
-vector<DSString> DSString::parseLine(const char* delim)const{
-    vector<DSString> wordsFromTweet;
+//Parse a line using delim and store in a DSVector (PA01)
+DSVector<DSString> DSString::parseLine(const char* delim)const{
+    DSVector<DSString> wordsFromLine;
     char* tempWord = strtok(this->c_str(), delim);
     while(tempWord != NULL){
         DSString newWord(tempWord);
-        wordsFromTweet.push_back(newWord);//will this work?
+        wordsFromLine.push_back(newWord);//will this work?
         tempWord = strtok(NULL, delim);
     }
-    return wordsFromTweet;
+    return wordsFromLine;
+}
+
+//Convert the DSVector of words parsed from a line into a full string (PA02)
+DSString DSString::parseLineIntoString(const char* delim){
+    DSVector<DSString> wordsFromLine = this->parseLine(delim);
+    DSString wholeLine("");
+    for(int i  = 0; i < wordsFromLine.getSize(); i++){
+        wholeLine += wordsFromLine.at(i);
+    }
+    return wholeLine;
+}
+
+bool DSString::find(const DSString& temp){
+    if(strstr(this->c_str(), temp.c_str()) == nullptr){
+         return false;
+    }
+    return true;
 }
 
 DSString& DSString::toLower(){

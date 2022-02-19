@@ -21,3 +21,7 @@ DSVector<DSString> FileManager::readFile(const DSString& filename){
     file.close();
     return data;
 }
+
+void FileManager::writeFile(const DSString&, map<DSString, DSVector<int>>){
+
+}

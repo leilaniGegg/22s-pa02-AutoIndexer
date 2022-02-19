@@ -17,6 +17,7 @@
 #include "DSVector.h"
 #include "DSString.h"
 #include "FileManager.h"
+#include "Indexer.h"
 
 using namespace std;
 
@@ -30,6 +31,13 @@ int main(int argc, char** argv) {
         for (int i = 0; i < test.getSize(); i++) {
             cout << test.at(i) << endl;
         }
+        cout << "--------------" << endl;
+        Indexer ind;
+        ind.retrieveBook(IO.readFile(argv[1]));
+        ind.displayBook();
+        //ind.addKeyPhrases(IO.readFile(argv[2]));
+        //ind.displayKeyPhrases();
+        //ind.calculateKWP(IO.readFile(argv[1]));
     }
     return 0;
 }

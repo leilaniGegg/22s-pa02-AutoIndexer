@@ -22,7 +22,7 @@ public:
     ~DSVector();
     DSVector& operator=(const DSVector<T>&);
     T& push_back(T);
-    T& at(const int);
+    T& at(const int)const;
     T& operator[](const int);
     T& begin();
     T& end();
@@ -82,7 +82,7 @@ T& DSVector<T>::push_back(T value){
 }
 
 template<typename T>
-T& DSVector<T>::at(const int index){
+T& DSVector<T>::at(const int index)const{
     if(index >= size){
         throw std::out_of_range("Index is out of range!");
     }

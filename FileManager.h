@@ -13,6 +13,7 @@ class FileManager{
     //planning
 public:
     DSVector<DSString> readFile(const DSString&);
+    void writeFile(const DSString&, map<DSString, DSVector<int>>);
 };
 
 #endif //INC_21F_PA02_FILEMANAGER_H
