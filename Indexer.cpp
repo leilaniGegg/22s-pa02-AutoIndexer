@@ -7,23 +7,25 @@
 void Indexer::retrieveBook(const DSVector<DSString>& input){
     //keeping the page as one DSString to make using the find() function easier
     DSVector<DSString> tempPage;
+    DSString tempLine;
     int currPageNum = atoi(input.at(0).parseLineIntoString("<>").c_str());
     cout << currPageNum << endl;
     for(int i = 1; input.at(i) != "<-1>"; i++){
-        DSString tempLine= input.at(i);
+        tempLine = input.at(i);
         if(tempLine[0] == '<'){
             cout << "In if" << endl;
             //if at the next page, add all lines gathered so far to the map with its page #
             pageNumsAndLines.insert(pair<int, DSVector<DSString>>(currPageNum, tempPage));
 
             //convert the <#> to an int and update the current page number
-            currPageNum = atoi(tempLine.parseLineIntoString("<>").c_str());
+            currPageNum = atoi(input.at(i).parseLineIntoString("<>").c_str());
             cout << currPageNum << endl;
             continue;
         }
         tempLine.toLower();
         tempPage.push_back(tempLine);
         cout << tempLine << "*" << endl;
+        //when I try adding this line below to line 25 it gives exit code 11 but idk why.
         //.parseLineIntoString("!@#$&,-()<>")
     }
 }
