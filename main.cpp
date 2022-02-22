@@ -27,17 +27,12 @@ int main(int argc, char** argv) {
     }
     else {
         FileManager IO;
-        DSVector<DSString> test = IO.readFile(argv[1]);
-        for (int i = 0; i < test.getSize(); i++) {
-            cout << test.at(i) << endl;
-        }
-        cout << "--------------" << endl;
         Indexer ind;
         ind.retrieveBook(IO.readFile(argv[1]));
         ind.displayBook();
-        //ind.addKeyPhrases(IO.readFile(argv[2]));
-        //ind.displayKeyPhrases();
-        //ind.calculateKWP(IO.readFile(argv[1]));
+        ind.addKeyPhrases(IO.readFile(argv[2]));
+        ind.displayKeyPhrases();
+        ind.calculateKPP();
     }
     return 0;
 }

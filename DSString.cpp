@@ -19,6 +19,7 @@ DSString::DSString(const char* input){
     else {
         word = new char[strlen(input) + 1];
         strcpy(word, input);
+        word[strlen(word)] = '\0';
     }
 }
 DSString::DSString(const DSString& input){
@@ -26,9 +27,9 @@ DSString::DSString(const DSString& input){
     strcpy(word, input.word);
 }
 DSString::~DSString(){
-    if(word != nullptr){
+    //if(word != nullptr){
         delete[] word; //is this bracket or no?
-    }
+    //}
 }
 
 //
@@ -36,14 +37,21 @@ DSString::~DSString(){
 //
 
 DSString& DSString::operator= (const char* temp){
+    if(word != nullptr){
+        delete[] word;
+    }
     word = new char[strlen(temp) + 1];
     strcpy(word, temp);
+    word[strlen(word)] = '\0';
     return *this;
 }
 
 DSString& DSString::operator= (const DSString& temp){
     if(this == &temp){
         return *this;
+    }
+    if(this != nullptr){
+        delete[] word;
     }
     word = new char[strlen(temp.word) + 1];
     strcpy(this->word, temp.word);

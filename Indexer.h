@@ -10,20 +10,22 @@
 #include <map>
 #include <unordered_map>
 
-using namespace std;
+//using namespace std;
 
 class Indexer{
 private:
-    unordered_map<int, DSVector<DSString>> pageNumsAndLines; //page number and corresponding lines on that page
-    DSVector<DSString> keyPhrases;
-    map<DSString, DSVector<int>, DSStringCompare> keyWordAndPages;  //the key word and a DSVector of page numbers it was found
+    unordered_map<int, DSString> pageNumsAndLines; //page number and corresponding lines on that page
+    DSVector<DSString> book;
+    //DSVector<DSString> keyPhrases;
+    map<DSString, DSVector<int>> keyPhrasesAndPages;  //the key word and a DSVector of page numbers it was found
 
 public:
     void retrieveBook(const DSVector<DSString>&);
+    //void retrievePNL(const DSVector<DSString>&);
     void displayBook()const;
     void addKeyPhrases(const DSVector<DSString>&);
     void displayKeyPhrases()const;
-    map<DSString, DSVector<int>>& calculateKWP(const DSVector<DSString>&); //calculate the keywords and the pages (return type not sure)
+    map<DSString, DSVector<int>>& calculateKPP(); //calculate the keywords and the pages (return type not sure)
 
 
 };

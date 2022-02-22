@@ -12,8 +12,8 @@ template <typename T>
 class DSVector{
 private:
     T* data;
-    int size = 0;
-    int capacity;
+    long size = 0;
+    long capacity;
     int index = 0; //for iterator, implement later
     void resize();
 
@@ -26,8 +26,8 @@ public:
     T& operator[](const int);
     T& begin();
     T& end();
-    int getSize()const;
-    int getCapacity()const;
+    long getSize()const;
+    long getCapacity()const;
     int find(const T&);
     DSVector& removeIndex(const int);
     DSVector& removeValue(const T&);
@@ -77,7 +77,7 @@ T& DSVector<T>::push_back(T value){
         resize();
     }
     data[size] = value;
-    size++;
+    ++size;
     return data[size-1];
 }
 
@@ -101,16 +101,16 @@ T& DSVector<T>::begin(){
 
 template<typename T>
 T& DSVector<T>::end(){
-    return data[size]; //not sure
+    return data[size-1]; //not sure
 }
 
 template<typename T>
-int DSVector<T>::getCapacity()const{
+long DSVector<T>::getCapacity()const{
     return capacity;
 }
 
 template<typename T>
-int DSVector<T>::getSize()const{
+long DSVector<T>::getSize()const{
     return size;
 }
 
