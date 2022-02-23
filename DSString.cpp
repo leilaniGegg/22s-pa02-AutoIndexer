@@ -118,7 +118,7 @@ bool DSString::operator< (const char* temp){
     return false;
 }
 
-char& DSString::operator[] (const int index){
+char& DSString::operator[] (const int index)const{
     return word[index];
 }
 
@@ -204,6 +204,13 @@ bool DSString::find(const DSString& temp){
 DSString& DSString::toLower(){
     for(int i = 0; i < strlen(word); i++){
         word[i] = tolower(word[i]);
+    }
+    return *this;
+}
+
+DSString& DSString::toUpper(){
+    for(int i = 0; i < strlen(word); i++){
+        word[i] = toupper(word[i]);
     }
     return *this;
 }

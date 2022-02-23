@@ -30,9 +30,12 @@ int main(int argc, char** argv) {
         Indexer ind;
         ind.retrieveBook(IO.readFile(argv[1]));
         ind.displayBook();
+        cout << "------" << endl;
         ind.addKeyPhrases(IO.readFile(argv[2]));
         ind.displayKeyPhrases();
+        cout << "------" << endl;
         ind.calculateKPP();
+        ind.displayKPP();
     }
     return 0;
 }

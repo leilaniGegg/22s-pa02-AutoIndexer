@@ -31,7 +31,8 @@ public:
     int find(const T&);
     DSVector& removeIndex(const int);
     DSVector& removeValue(const T&);
-    void display()const;
+    void displayNewLine()const;
+    void displayComma()const;
 };
 
 template <typename T>
@@ -155,9 +156,17 @@ DSVector<T>& DSVector<T>::removeValue(const T&){
 }
 
 template<class T>
-void DSVector<T>::display()const{
-    for(int i = 0; i < size; i++){
+void DSVector<T>::displayNewLine()const{
+    for(int i = 1; i < size; i++){
         cout << data[i] << endl;
+    }
+}
+
+template<class T>
+void DSVector<T>::displayComma()const{
+    cout << data[0];
+    for(int i = 1; i < size; i++){
+        cout << ", " << data[i] << endl;
     }
 }
 

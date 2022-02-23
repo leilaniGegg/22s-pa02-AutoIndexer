@@ -40,7 +40,7 @@ void Indexer::displayBook()const{
     /*for(auto itr = pageNumsAndLines.begin(); itr != pageNumsAndLines.end(); itr++){
         cout << itr->first << endl;
     }*/
-    book.display();
+    book.displayNewLine();
 }
 
 void Indexer::addKeyPhrases(const DSVector<DSString>& temp){
@@ -52,8 +52,7 @@ void Indexer::addKeyPhrases(const DSVector<DSString>& temp){
 void Indexer::displayKeyPhrases()const{
     map<DSString, DSVector<int>>::const_iterator itr;
     for(itr = keyPhrasesAndPages.begin(); itr != keyPhrasesAndPages.end(); itr++){
-        std::cout << itr->first << endl;
-        itr->second.display();
+        cout << itr->first << endl;
     }
 }
 
@@ -65,26 +64,32 @@ map<DSString, DSVector<int>>& Indexer::calculateKPP(){
     //
     int currPage = atoi(book.at(0).parseLineIntoString("<>").c_str());
     for (int i = 1; i < book.getSize(); i++) {
-        cout << "in first for loop" << endl;
         if(book.at(i)[0] == '<'){
             currPage = atoi(book.at(i).parseLineIntoString("<>").c_str());
-            cout << "in if" << endl;
             continue;
         }
         else if(book.at(i) == ""){
             continue;
         }
         for(auto itr = keyPhrasesAndPages.begin(); itr != keyPhrasesAndPages.end(); itr++){
-            cout << "in second for loop" << endl;
-            cout << book.at(i) << endl;
             if (book.at(i).toLower().find(itr->first)){ //if curr line contains current keyphrase
-                cout << "in second if" << endl;
                 itr->second.push_back(currPage);
-                cout << itr->first << "+";
-                itr->second.display();
             }
         }
     }
     return keyPhrasesAndPages;
+}
 
+void Indexer::displayKPP(){
+    char currLetter = toupper((keyPhrasesAndPages.begin()->first)[0]); //first pos
+    cout << "[" << currLetter << "]" << endl;
+    for(auto itr = keyPhrasesAndPages.begin(); itr != keyPhrasesAndPages.end(); itr++){
+        if((currLetter != toupper(itr->first[0]))){
+            currLetter = toupper(itr->first[0]);
+            cout << "[" << currLetter << "]" << endl;
+        }
+        cout << itr->first << ": ";
+        itr->second.displayComma();
+        cout << endl;
+    }
 }

@@ -4,4 +4,3 @@ analysis
 doubly linked list
 A* algorithm
 Tree traversal
-a
