@@ -70,7 +70,7 @@ template <typename T>
 DSVector<T>::DSVector(const DSVector& temp){
     capacity = temp.capacity;
     size = temp.size;
-    data = new int[capacity];
+    data = new T[capacity];
     for(int i = 0; i < size; i++){
         data[i] = temp.data[i];
     }
