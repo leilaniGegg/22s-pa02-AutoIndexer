@@ -125,7 +125,6 @@ char& DSString::operator[] (const int index)const{
 //
 // Other functions
 //
-//works!
 int DSString::getLength()const{
     return strlen(word);
 }
@@ -208,9 +207,10 @@ DSString& DSString::toLower(){
     return *this;
 }
 
-DSString& DSString::toUpper(){
+DSString DSString::toUpper()const{
+    DSString temp;
     for(int i = 0; i < strlen(word); i++){
-        word[i] = toupper(word[i]);
+        temp[i] = toupper(word[i]);
     }
-    return *this;
+    return temp;
 }

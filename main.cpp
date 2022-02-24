@@ -21,9 +21,9 @@
 using namespace std;
 
 int main(int argc, char** argv) {
-    if(argc == 1) {
+    //if(argc == 1) {
         runCatchTests();
-    }
+    /*}
     else {
         FileManager IO;
         Indexer ind;
@@ -36,6 +36,6 @@ int main(int argc, char** argv) {
         ind.calculateKPP();
         //ind.displayKPP();
         IO.writeFile(argv[3], ind.getKPP());
-    }
+    }*/
     return 0;
 }

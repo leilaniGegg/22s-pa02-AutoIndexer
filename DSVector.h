@@ -139,6 +139,7 @@ DSVector<T>& DSVector<T>::removeIndex(const int index){
     }
     delete[] data;
     data = temp;
+    size--;
     return *this;
 }
 
@@ -189,7 +190,7 @@ T& DSVector<T>::operator[](const int index){
 template<typename T>
 T& DSVector<T>::begin(){
     itr = 0;
-    return *data[itr];
+    return data[itr];
 }
 
 template<typename T>
@@ -238,6 +239,7 @@ void DSVector<T>::displayComma()const{
     for(int i = 1; i < size; i++){
         cout << ", " << data[i];
     }
+    cout << endl;
 }
 
 ///----------------

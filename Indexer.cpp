@@ -88,11 +88,11 @@ void Indexer::sortKPP(){
 }
 
 void Indexer::displayKPP(){
-    char currLetter = toupper((keyPhrasesAndPages.begin()->first)[0]); //first pos
+    char currLetter = (keyPhrasesAndPages.begin()->first).toUpper()[0]; //first pos
     cout << "[" << currLetter << "]" << endl;
     for(auto itr = keyPhrasesAndPages.begin(); itr != keyPhrasesAndPages.end(); itr++){
-        if((currLetter != toupper(itr->first[0]))){
-            currLetter = toupper(itr->first[0]);
+        if((currLetter != itr->first.toUpper()[0])){
+            currLetter = itr->first.toUpper()[0];
             cout << "[" << currLetter << "]" << endl;
         }
         cout << itr->first << ": ";

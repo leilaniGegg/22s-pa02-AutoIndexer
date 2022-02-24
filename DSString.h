@@ -127,7 +127,7 @@ public:
     DSString parseLineIntoString(const char*); //return it as a single DSString
     bool find(const DSString&);
     DSString& toLower();
-    DSString& toUpper();
+    DSString toUpper()const;
 
 
     //You are free to add more functionality to the class.  For example,
