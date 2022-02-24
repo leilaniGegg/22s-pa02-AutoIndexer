@@ -27,7 +27,8 @@ public:
     void displayKeyPhrases()const;
     map<DSString, DSVector<int>>& calculateKPP(); //calculate the keywords and the pages (return type not sure)
     void displayKPP(); //display the key phrases and the list of pages, as they would in the output file (for testing purposes)
-
+    void sortKPP();
+    map<DSString, DSVector<int>>& getKPP();
 
 };
 #endif //INC_21F_PA02_INDEXER_H

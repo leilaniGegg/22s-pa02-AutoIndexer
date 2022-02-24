@@ -62,22 +62,29 @@ map<DSString, DSVector<int>>& Indexer::calculateKPP(){
     //go through the lines in each page, if the keyword is found once, store that page number and
     //continue to next iteration
     //
-    int currPage = atoi(book.at(0).parseLineIntoString("<>").c_str());
-    for (int i = 1; i < book.getSize(); i++) {
-        if(book.at(i)[0] == '<'){
-            currPage = atoi(book.at(i).parseLineIntoString("<>").c_str());
-            continue;
-        }
-        else if(book.at(i) == ""){
-            continue;
-        }
-        for(auto itr = keyPhrasesAndPages.begin(); itr != keyPhrasesAndPages.end(); itr++){
-            if (book.at(i).toLower().find(itr->first)){ //if curr line contains current keyphrase
+    for(auto itr = keyPhrasesAndPages.begin(); itr != keyPhrasesAndPages.end(); itr++){
+        int currPage = atoi(book.at(0).parseLineIntoString("<>").c_str());
+        bool foundInPage = false;
+        for (int i = 1; i < book.getSize(); i++){
+            if(book.at(i)[0] == '<'){
+                currPage = atoi(book.at(i).parseLineIntoString("<>").c_str());
+                foundInPage = false;
+                continue;
+            }
+            if (book.at(i).toLower().find(itr->first) && !foundInPage){ //if curr line contains current keyphrase
                 itr->second.push_back(currPage);
+                foundInPage = true;
             }
         }
     }
+    sortKPP();
     return keyPhrasesAndPages;
+}
+
+void Indexer::sortKPP(){
+    for(auto itr = keyPhrasesAndPages.begin(); itr != keyPhrasesAndPages.end(); itr++){
+        itr->second.sort();
+    }
 }
 
 void Indexer::displayKPP(){
@@ -89,7 +96,13 @@ void Indexer::displayKPP(){
             cout << "[" << currLetter << "]" << endl;
         }
         cout << itr->first << ": ";
-        itr->second.displayComma();
+        if(!itr->second.isEmpty()){
+            itr->second.sort().displayComma();
+        }
         cout << endl;
     }
+}
+
+map<DSString, DSVector<int>>& Indexer::getKPP(){
+    return keyPhrasesAndPages;
 }

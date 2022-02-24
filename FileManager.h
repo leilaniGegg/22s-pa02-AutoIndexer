@@ -8,12 +8,13 @@
 #include "DSVector.h"
 #include "DSString.h"
 #include <fstream>
+#include <iomanip>
 
 class FileManager{
     //planning
 public:
     DSVector<DSString> readFile(const DSString&);
-    void writeFile(const DSString&, map<DSString, DSVector<int>>);
+    void writeFile(const DSString&, map<DSString, DSVector<int>>&);
 };
 
 #endif //INC_21F_PA02_FILEMANAGER_H

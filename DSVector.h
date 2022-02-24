@@ -14,23 +14,47 @@ private:
     T* data;
     long size = 0;
     long capacity;
-    int index = 0; //for iterator, implement later
+    int itr = 0;
     void resize();
 
 public:
+    ///--------------------------
+    /// CONSTRUCTOR AND RULE OF 3
+    ///--------------------------
     DSVector();
+    DSVector(const DSVector&);
     ~DSVector();
     DSVector& operator=(const DSVector<T>&);
+
+    ///----------
+    /// MODIFIERS
+    ///----------
     T& push_back(T);
+    T& insert(T, int);
+    DSVector& removeIndex(const int);
+    DSVector& sort();
+
+    ///----------
+    /// ACCESSORS
+    ///----------
+    int find(const T&);
     T& at(const int)const;
     T& operator[](const int);
+
+    ///---------------------------
+    /// ITERATOR OR BOOL FUNCTIONS
+    ///---------------------------
     T& begin();
     T& end();
+    bool hasNext();
+    T& getNext();
+    bool isEmpty();
+
+    ///----------------------------
+    /// GETTERS AND PRINT FUNCTIONS
+    ///----------------------------
     long getSize()const;
     long getCapacity()const;
-    int find(const T&);
-    DSVector& removeIndex(const int);
-    DSVector& removeValue(const T&);
     void displayNewLine()const;
     void displayComma()const;
 };
@@ -40,6 +64,16 @@ DSVector<T>::DSVector(){
     capacity = 10;
     size = 0;
     data = new T[capacity];
+}
+
+template <typename T>
+DSVector<T>::DSVector(const DSVector& temp){
+    capacity = temp.capacity;
+    size = temp.size;
+    data = new int[capacity];
+    for(int i = 0; i < size; i++){
+        data[i] = temp.data[i];
+    }
 }
 
 template <typename T>
@@ -61,16 +95,7 @@ DSVector<T>& DSVector<T>::operator=(const DSVector<T>& temp){
         return *this; // I think
 }
 
-template <typename T>
-void DSVector<T>::resize() {
-    T* temp = new T[capacity*2];
-    for(int i = 0; i < capacity; i++){
-        temp[i] = data[i];
-    }
-    delete[] data;
-    data = temp;
-    capacity *= 2;
-}
+
 
 template <typename T>
 T& DSVector<T>::push_back(T value){
@@ -82,47 +107,22 @@ T& DSVector<T>::push_back(T value){
     return data[size-1];
 }
 
-template<typename T>
-T& DSVector<T>::at(const int index)const{
-    if(index >= size){
-        throw std::out_of_range("Index is out of range!");
+template <typename T>
+T& DSVector<T>::insert(T value, int index){
+    T* temp = new T[++size];
+    if(size == capacity){
+        resize();
     }
-    return data[index];
-}
-
-template<typename T>
-T& DSVector<T>::operator[](const int index){
-    return data[index];
-}
-
-template<typename T>
-T& DSVector<T>::begin(){
-    return *data[0];
-}
-
-template<typename T>
-T& DSVector<T>::end(){
-    return data[size-1]; //not sure
-}
-
-template<typename T>
-long DSVector<T>::getCapacity()const{
-    return capacity;
-}
-
-template<typename T>
-long DSVector<T>::getSize()const{
-    return size;
-}
-
-template<typename T>
-int DSVector<T>::find(const T& temp){
-    for(int i = 0; i < size; i++) {
-        if (data[i] == temp) {
-            return i;
-        }
+    for(int i = 0; i < index; i++){
+        temp[i] = data[i];
     }
-    return -1;
+    temp[index] = value;
+    for(int i = index+1; i < size; i++){
+        temp[i] = data[i-1];
+    }
+    delete[] data;
+    data = temp;
+    return data[index];
 }
 
 template<typename T>
@@ -140,19 +140,89 @@ DSVector<T>& DSVector<T>::removeIndex(const int index){
     delete[] data;
     data = temp;
     return *this;
-    //Resize() for reference
-    /*T* temp = new T[capacity*2];
-    for(int i = 0; i < capacity; i++){
-        temp[i] = data[i];
-    }
-    delete[] data;
-    data = temp;
-    capacity *= 2; */
 }
 
-template<class T>
-DSVector<T>& DSVector<T>::removeValue(const T&){
-        //maybe don't need this function
+template<typename T>
+DSVector<T>& DSVector<T>::sort(){
+    //Insertion Sort
+    int j;
+    T temp;
+    for(int i = 1; i < this->getSize(); i++){
+        j = i;
+        while(data[j] < data[j-1] && j > 0){
+            temp = data[j];
+            data[j] = data[j-1];
+            data[j-1] = temp;
+            --j;
+        }
+    }
+    return *this;
+}
+
+
+
+template<typename T>
+int DSVector<T>::find(const T& temp){
+    for(int i = 0; i < size; i++) {
+        if (data[i] == temp) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+template<typename T>
+T& DSVector<T>::at(const int index)const{
+    if(index >= size){
+        throw std::out_of_range("Index is out of range!");
+    }
+    return data[index];
+}
+
+template<typename T>
+T& DSVector<T>::operator[](const int index){
+    return data[index];
+}
+
+
+
+template<typename T>
+T& DSVector<T>::begin(){
+    itr = 0;
+    return *data[itr];
+}
+
+template<typename T>
+T& DSVector<T>::end(){
+    itr = size - 1;
+    return data[itr];
+}
+
+template<typename T>
+bool DSVector<T>::hasNext(){
+    return itr+1 < size;
+}
+
+template<typename T>
+T& DSVector<T>::getNext(){
+    return data[++itr];
+}
+
+template<typename T>
+bool DSVector<T>::isEmpty(){
+    return (size == 0);
+}
+
+
+
+template<typename T>
+long DSVector<T>::getSize()const{
+    return size;
+}
+
+template<typename T>
+long DSVector<T>::getCapacity()const{
+    return capacity;
 }
 
 template<class T>
@@ -166,8 +236,22 @@ template<class T>
 void DSVector<T>::displayComma()const{
     cout << data[0];
     for(int i = 1; i < size; i++){
-        cout << ", " << data[i] << endl;
+        cout << ", " << data[i];
     }
+}
+
+///----------------
+/// PRIVATE FUNCTION
+/// ---------------
+template <typename T>
+void DSVector<T>::resize() {
+    T* temp = new T[capacity*2];
+    for(int i = 0; i < capacity; i++){
+        temp[i] = data[i];
+    }
+    delete[] data;
+    data = temp;
+    capacity *= 2;
 }
 
 #endif //INC_21F_PA02_DSVECTOR_H

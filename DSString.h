@@ -96,7 +96,7 @@ public:
     /**
      * getLength() returns the number (count) of characters in the string.
      **/
-    int getLength();
+    int getLength()const;
 
     /**
      * The substring method returns a string object that contains a

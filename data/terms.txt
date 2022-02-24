@@ -1,6 +1,5 @@
-b+ Tree
-algorithm
-analysis
-doubly linked list
-A* algorithm
-Tree traversal
+play
+Oedipus
+Queen
+death
+speak

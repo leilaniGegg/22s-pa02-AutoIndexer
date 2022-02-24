@@ -126,7 +126,7 @@ char& DSString::operator[] (const int index)const{
 // Other functions
 //
 //works!
-int DSString::getLength(){
+int DSString::getLength()const{
     return strlen(word);
 }
 

@@ -3,7 +3,6 @@
  */
 
 #include <iostream>
-#include <fstream>
 
 /**
  * catch_setup.h and catch_setup.cpp contain the #define directive for
@@ -29,13 +28,14 @@ int main(int argc, char** argv) {
         FileManager IO;
         Indexer ind;
         ind.retrieveBook(IO.readFile(argv[1]));
-        ind.displayBook();
-        cout << "------" << endl;
+        //ind.displayBook();
+        //cout << "------" << endl;
         ind.addKeyPhrases(IO.readFile(argv[2]));
-        ind.displayKeyPhrases();
-        cout << "------" << endl;
+        //ind.displayKeyPhrases();
+        //cout << "------" << endl;
         ind.calculateKPP();
-        ind.displayKPP();
+        //ind.displayKPP();
+        IO.writeFile(argv[3], ind.getKPP());
     }
     return 0;
 }
