@@ -4,51 +4,33 @@
 
 #include "Indexer.h"
 
-/*void Indexer::retrieveBook(const DSVector<DSString>& input){
-    //keeping the page as one DSString to make using the find() function easier
-    DSString line;
-    int currPageNum = atoi(input.at(0).parseLineIntoString("<>").c_str());
-    cout << currPageNum << endl;
-    for(int i = 1; input.at(i) != "<-1>"; i++){
-        //DSString* tempLine = &input.at(i).toLower();
-        if(input.at(i)[0] == '<'){
-            cout << "In if" << endl;
-            //if at the next page, add all lines gathered so far to the map with its page #
-            //pageNumsAndLines.insert(pair<int, DSVector<DSString>>(currPageNum, tempPage));
-            pageNumsAndLines[currPageNum] = DSString(line);
-            line = "";
-            //convert the <#> to an int and update the current page number
-            currPageNum = atoi(input.at(i).parseLineIntoString("<>").c_str());
-            cout << currPageNum << endl;
-            continue;
-        }
-        //tempLine.toLower();
-        line = line + input.at(i).toLower();
-        cout << input.at(i) << endl;
-        cout << "*" << endl;
-        //when I try adding this line below to line 25 it gives exit code 11 but idk why.
-        //.parseLineIntoString("!@#$&,-()<>")
-    }
-}*/
 
+/**
+ *@param input the DSVector read from the input test_book file
+ */
 void Indexer::retrieveBook(const DSVector<DSString>& input) {
     book = input;
 }
 
+/**
+ * Display the book. For testing purposes
+ */
 void Indexer::displayBook()const{
-    //map<int, DSString>::iterator itr;
-    /*for(auto itr = pageNumsAndLines.begin(); itr != pageNumsAndLines.end(); itr++){
-        cout << itr->first << endl;
-    }*/
     book.displayNewLine();
 }
 
+/**
+ *@param temp DSVector read from the input terms file
+ */
 void Indexer::addKeyPhrases(const DSVector<DSString>& temp){
     for(int i = 0; i < temp.getSize();i++) {
         keyPhrasesAndPages[temp.at(i).toLower()] = DSVector<int>();
     }
 }
 
+/**
+ * Display the key phrases. Testing purposes only
+ */
 void Indexer::displayKeyPhrases()const{
     map<DSString, DSVector<int>>::const_iterator itr;
     for(itr = keyPhrasesAndPages.begin(); itr != keyPhrasesAndPages.end(); itr++){
@@ -56,6 +38,12 @@ void Indexer::displayKeyPhrases()const{
     }
 }
 
+/**
+ * Iterate through each key phrase
+ * Iterate through each line of the book and look for the key phrase
+ * Update the current page number if an '<' is encountered
+ *@return a reference to class data member map containing key phrase and vector of page numbers
+ */
 map<DSString, DSVector<int>>& Indexer::calculateKPP(){
     //have book lines sorted into categories by page number (in map?)
     //loop through each keyword (DSVector
@@ -81,12 +69,18 @@ map<DSString, DSVector<int>>& Indexer::calculateKPP(){
     return keyPhrasesAndPages;
 }
 
+/**
+ * Sort the list of page numbers in ascending order
+ */
 void Indexer::sortKPP(){
     for(auto itr = keyPhrasesAndPages.begin(); itr != keyPhrasesAndPages.end(); itr++){
         itr->second.sort();
     }
 }
 
+/**
+ * Display the key phrases and pages. For testing purposes
+ */
 void Indexer::displayKPP(){
     char currLetter = (keyPhrasesAndPages.begin()->first).toUpper()[0]; //first pos
     cout << "[" << currLetter << "]" << endl;
@@ -103,6 +97,9 @@ void Indexer::displayKPP(){
     }
 }
 
+/**
+ *@return the map object containing the key phrases and pages
+ */
 map<DSString, DSVector<int>>& Indexer::getKPP(){
     return keyPhrasesAndPages;
 }

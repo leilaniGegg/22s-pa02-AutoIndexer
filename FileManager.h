@@ -11,10 +11,12 @@
 #include <iomanip>
 
 class FileManager{
-    //planning
 public:
     DSVector<DSString> readFile(const DSString&);
     void writeFile(const DSString&, map<DSString, DSVector<int>>&);
+    int countDigits(int); //for formatting
+    int decideIncrease1(int);
+    int decideIncrease2(int);
 };
 
 #endif //INC_21F_PA02_FILEMANAGER_H

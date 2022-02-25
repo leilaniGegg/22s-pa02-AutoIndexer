@@ -208,7 +208,7 @@ DSString& DSString::toLower(){
 }
 
 DSString DSString::toUpper()const{
-    DSString temp;
+    DSString temp = word;
     for(int i = 0; i < strlen(word); i++){
         temp[i] = toupper(word[i]);
     }

@@ -2,8 +2,6 @@
  * Fall 2021 PA 02 Template Repo.
  */
 
-#include <iostream>
-
 /**
  * catch_setup.h and catch_setup.cpp contain the #define directive for
  * the CATCH2 framework.  You can see in main below how I'm calling the
@@ -21,9 +19,9 @@
 using namespace std;
 
 int main(int argc, char** argv) {
-    //if(argc == 1) {
+    if(argc == 1) {
         runCatchTests();
-    /*}
+    }
     else {
         FileManager IO;
         Indexer ind;
@@ -36,6 +34,6 @@ int main(int argc, char** argv) {
         ind.calculateKPP();
         //ind.displayKPP();
         IO.writeFile(argv[3], ind.getKPP());
-    }*/
+    }
     return 0;
 }

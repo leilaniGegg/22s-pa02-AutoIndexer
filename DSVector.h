@@ -59,6 +59,10 @@ public:
     void displayComma()const;
 };
 
+
+///--------------------------
+/// CONSTRUCTOR AND RULE OF 3
+///--------------------------
 template <typename T>
 DSVector<T>::DSVector(){
     capacity = 10;
@@ -92,11 +96,13 @@ DSVector<T>& DSVector<T>::operator=(const DSVector<T>& temp){
                 data[i] = temp.data[i];
             }
         }
-        return *this; // I think
+        return *this;
 }
 
 
-
+///----------
+/// MODIFIERS
+///----------
 template <typename T>
 T& DSVector<T>::push_back(T value){
     if(size == capacity) {
@@ -132,7 +138,6 @@ DSVector<T>& DSVector<T>::removeIndex(const int index){
         temp[i] = data[i];
     }
     int dataIndex, tempIndex;
-    //might be able to get rid of tempIndex condition
     for(tempIndex = index, dataIndex = index + 1;
         tempIndex < size && dataIndex < size; tempIndex++, dataIndex++){
         temp[tempIndex] = data[dataIndex];
@@ -161,7 +166,9 @@ DSVector<T>& DSVector<T>::sort(){
 }
 
 
-
+///----------
+/// ACCESSORS
+///----------
 template<typename T>
 int DSVector<T>::find(const T& temp){
     for(int i = 0; i < size; i++) {
@@ -186,7 +193,9 @@ T& DSVector<T>::operator[](const int index){
 }
 
 
-
+///---------------------------
+/// ITERATOR OR BOOL FUNCTIONS
+///---------------------------
 template<typename T>
 T& DSVector<T>::begin(){
     itr = 0;
@@ -215,7 +224,9 @@ bool DSVector<T>::isEmpty(){
 }
 
 
-
+///----------------------------
+/// GETTERS AND PRINT FUNCTIONS
+///----------------------------
 template<typename T>
 long DSVector<T>::getSize()const{
     return size;

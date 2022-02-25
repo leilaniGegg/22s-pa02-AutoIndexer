@@ -59,16 +59,16 @@ TEST_CASE("DSVector class", "[vector]"){
         REQUIRE((test.getSize() == 11));
         REQUIRE((test.getCapacity() == 20)); //size went over capacity once, so initial capacity of 10 should be doubled to 20
         //Not sure if or how these need testing
-        cout << "Printing elements per line" << endl;
+        cout << endl << "Printing elements per line" << endl;
         test.displayNewLine();
-        cout << "Printing elements seperated by comma" << endl;
+        cout << endl << "Printing elements seperated by comma" << endl;
         test.displayComma();
     }
 }
 
 TEST_CASE("DSString class", "[string]"){
 
-    DSString list[10];
+    DSString list[11];
 
     list[0] = DSString("potato");
     list[1] = DSString("lilyPad");
@@ -80,7 +80,7 @@ TEST_CASE("DSString class", "[string]"){
     list[7] = DSString("!!!!");
     list[8] = DSString("How much wood can a wood chuck chuck");
     list[9] = DSString("cOkE ZeRO");
-    //list[10] = DSString("lily");
+    list[10] = DSString("te,st, se,nte,nce");
 
 
     SECTION("Comparison Operators" ) {
@@ -119,11 +119,13 @@ TEST_CASE("DSString class", "[string]"){
         REQUIRE((strcmp(list[9].c_str(), x) == 0));
 
     }
-    SECTION("Parse Tweet Function"){
+    SECTION("Parse Line Functions"){
         DSVector<DSString> words = list[8].parseLine(" ");
+        DSString temp = list[10].parseLineIntoString(",");
         REQUIRE((words.at(2) == "wood"));
         REQUIRE((words.at(4) == "a"));
         REQUIRE((words.at(6) == "chuck"));
+        REQUIRE((temp == "test sentence"));
     }
 
     SECTION("To Lower Function"){
@@ -131,13 +133,16 @@ TEST_CASE("DSString class", "[string]"){
         REQUIRE((list[1].toLower() == "lilypad"));
         REQUIRE((list[9].toLower() == "coke zero"));
     }
-    /*SECTION("To Upper Function"){
-        DSString x = list[5].toUpper();
-        DSString y = list[5].toUpper();
-        DSString z = list[5].toUpper();
+    SECTION("To Upper Function"){
+        REQUIRE((list[5].toUpper() == "A CHILD"));
+        REQUIRE((list[1].toUpper() == "LILYPAD"));
+        REQUIRE(( list[9].toUpper()== "COKE ZERO"));
+    }
+    SECTION("Find Function"){
+        REQUIRE((list[8].find("wood")));
+        REQUIRE((list[8].find("chuck")));
+        REQUIRE((list[2].find("west")));
+        REQUIRE(!(list[2].find("cat")));
+    }
 
-        //REQUIRE((x == "A CHILD"));
-        //REQUIRE((y == "LILYPAD"));
-        //REQUIRE((z == "COKE ZERO"));
-    }*/
 }
